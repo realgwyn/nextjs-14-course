@@ -1,10 +1,19 @@
 import Image from 'next/image'
 import styles from './page.module.css'
+import {auth} from "@/app/auth";
 
-export default function Home() {
-  return (
-      <main>
+export default async function Home() {
 
-      </main>
-  )
+    const session = await auth();
+    let message = "Hello Stranger";
+    console.log("session: " + session)
+    if(session){
+        message = `Hello ${session?.user.name}`
+    }
+
+    return (
+        <main>
+            {message}
+        </main>
+    )
 }

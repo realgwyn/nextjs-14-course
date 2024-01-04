@@ -41,3 +41,22 @@ Delete boilerplate from files:
 
 Create [NavMenu.tsx](app%2FNavMenu.tsx)
 and add it to [layout.tsx](app%2Flayout.tsx)
+
+### 3. Static page
+
+[about/page.tsx](app%2Fabout%2Fpage.tsx)
+
+http://localhost:3000/about
+
+Forcing caching:
+```tsx
+export const dynamic = 'force-static';
+```
+
+Adding metadata
+```tsx
+export const metadata: Metadata = {
+    title: 'About us',
+    description: 'We are social media company',
+};
+```

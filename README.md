@@ -493,3 +493,11 @@ Run schema migration
 ```bash
 npx prisma migrate dev
 ```
+
+### 20. Follow user feature
+
+Create API Route [follow/route.tsx](app%2Fapi%2Ffollow%2Froute.tsx)  
+Create Server Component: [components/FollowButton.tsx](components%2FFollowButton.tsx) and Client Component: [components/FollowClient.tsx](components%2FFollowClient.tsx)  
+Follow button used in user profile page: [users/[id]/page.tsx](app%2Fusers%2F%5Bid%5D%2Fpage.tsx)  
+
+**DEMO:** Go to http://localhost:3000/users, open user's profile, click 'Follow' button

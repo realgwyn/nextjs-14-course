@@ -415,3 +415,46 @@ export default function LoadingUsers() {
     return <div>Loading users list...</div>
 }
 ```
+
+### 17. Error handling and error recovery
+
+Create buggy _client component_ page [buggy-page/page.tsx](app%2Fbuggy-page%2Fpage.tsx)
+
+```tsx
+'use client' // <-- RESET WORKS ONLY ON CLIENT COMPONENTS
+
+export default function BuggyPage() {
+    if(Math.random() < 0.5){
+        console.log("time to fail!")
+        throw new Error("server unavailable")
+    }
+    return (
+        <div>
+            This page fails from time to time, <a href={'/buggy-page'}>refresh</a> it few times to see the error.
+        </div>
+    );
+}
+```
+
+Create custom error page [buggy-page/error.tsx](app%2Fbuggy-page%2Ferror.tsx)
+```tsx
+'use client'
+
+import {useEffect} from "react";
+
+export default function Error({error, reset}: { error: Error; reset: () => void; }) {
+    useEffect(() => {
+        console.error(error);
+    }, [error]);
+
+    return (
+        <div>
+            <h2>Something went wrong!</h2>
+            <p>{error.message}</p>
+            <button onClick={reset}>Click this button to retry</button>
+        </div>
+    );
+}
+```
+
+**DEMO:** http://localhost:3000/buggy-page

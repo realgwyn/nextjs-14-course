@@ -202,3 +202,18 @@ DATABASE_URL=postgresql://USERNAME:PASSWORD@ep-still-waterfall-******.eu-central
 SHADOW_DATABASE_URL=postgresql://USERNAME:PASSWORD@ep-still-waterfall-*******.eu-central-1.aws.neon.tech/shadow?sslmode=require
 ...
 ```
+
+### 10. Setup Prisma ORM
+
+```bash
+npx prisma init
+```
+
+
+Open [prisma/schema.prisma](myspace%2Fprisma%2Fschema.prisma) and add:
+```js
+shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
+```
+
+_Tip: Intellij install Prisma ORM plugin_
+

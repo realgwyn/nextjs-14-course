@@ -72,3 +72,18 @@ export async function GET() {
     return NextResponse.json(posts);
 }
 ```
+
+### 5. Dynamic Routes (SSR - Server-Side-Rendering)
+
+[blog/[slug]/page.tsx](app%2Fblog%2F%5Bslug%5D%2Fpage.tsx)
+
+disable caching:
+```ts
+export const dynamic = 'force-dynamic'
+ ```
+or use revalidate cache period
+```ts
+export const revalidate = 69;
+```
+
+http://localhost:3000/blog/lorem-ipsum

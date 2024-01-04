@@ -456,3 +456,5 @@ export default function Error({error, reset}: { error: Error; reset: () => void;
     );
 }
 ```
+
+**DEMO:** http://localhost:3000/buggy-page

@@ -381,3 +381,9 @@ export async function GET(request: Request){
 ```
 
 **DEMO:** http://localhost:3000/api/users
+
+### 14. Prisma: Accessing database in server components
+
+Create [components/UserCard.tsx](components%2FUserCard.tsx) and add it to [users/page.tsx](app%2Fusers%2Fpage.tsx)
+
+**DEMO:** http://localhost:3000/users

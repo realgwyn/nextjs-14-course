@@ -184,3 +184,21 @@ redirect('/api/auth/signin')
 ```
 
 **DEMO:** http://localhost:3000/dashboard
+
+### 9. External database setup
+
+Go to and create account https://console.neon.tech/ Choose region: `europe`
+
+Go to dashboard and create role: `admin`,
+
+Create database name: `sandbox`, owner: `admin`
+
+Create another database name: `shadow`, owner: `admin`
+
+Copy connection strings of `sandbox` and `shadow` and Add connection strings to `.env`:
+```env
+...
+DATABASE_URL=postgresql://USERNAME:PASSWORD@ep-still-waterfall-******.eu-central-1.aws.neon.tech/sandbox?sslmode=require
+SHADOW_DATABASE_URL=postgresql://USERNAME:PASSWORD@ep-still-waterfall-*******.eu-central-1.aws.neon.tech/shadow?sslmode=require
+...
+```

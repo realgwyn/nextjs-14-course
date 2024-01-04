@@ -1,0 +1,24 @@
+.nav {
+    display: flex;
+    background-color: #1daa22;
+    height: 70px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav a {
+    color: #000000;
+}
+
+.links {
+    list-style: none;
+    display: flex;
+    margin-right: 1rem;
+}
+
+.links li {
+    height: 70px;
+    display: flex;
+    align-items: center;
+    padding: 0.25rem;
+}

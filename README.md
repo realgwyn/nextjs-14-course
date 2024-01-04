@@ -36,3 +36,8 @@ Start app
 
 Delete boilerplate from files:
 [page.tsx](app%2Fpage.tsx) and [globals.css](app%2Fglobals.css)
+
+### 2. Navbar
+
+Create [NavMenu.tsx](app%2FNavMenu.tsx)
+and add it to [layout.tsx](app%2Flayout.tsx)

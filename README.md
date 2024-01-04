@@ -353,3 +353,31 @@ npx prisma migrate dev
 
 **DEMO:** Check if new columns are present in user table:
 ![screenshots/prisma2.png](screenshots/prisma2.png)
+
+
+### 13. Prisma: Accessing database in Routes
+
+Generate prisma client:
+```bash
+npx prisma generate
+```
+
+Export global prisma client [lib/prisma.ts](lib%2Fprisma.ts)
+```js
+import { PrismaClient } from '@prisma/client'
+export const prisma = new PrismaClient()
+```
+
+Create new api route for users [route.ts](app%2Fapi%2Fusers%2Froute.ts)
+```ts
+import { prisma } from '@/lib/prisma'
+import { NextResponse } from "next/server";
+
+export async function GET(request: Request){
+    const users = await prisma.user.findMany();
+    console.log(users)
+    return NextResponse.json(users);
+}
+```
+
+**DEMO:** http://localhost:3000/api/users

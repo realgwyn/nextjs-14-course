@@ -323,3 +323,13 @@ Your database is now in sync with your schema.
 ```
 
 **DEMO TIME - login and check if session is persisted in the database** 
+
+Start app
+```bash
+npx run dev
+```
+Click login button, login with github account
+
+Next go to https://console.neon.tech/ dashboard and check if session exists
+
+![screenshots/prisma1.png](screenshots/prisma1.png)

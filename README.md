@@ -501,3 +501,25 @@ Create Server Component: [components/FollowButton.tsx](components%2FFollowButton
 Follow button used in user profile page: [users/[id]/page.tsx](app%2Fusers%2F%5Bid%5D%2Fpage.tsx)  
 
 **DEMO:** Go to http://localhost:3000/users, open user's profile, click 'Follow' button
+
+### 21. Deploy on Vercel
+
+TODO: build keeps failing, linting errors...
+https://vercel.com/rafals-projects-d385de8b/nextjs-14-course/DY6cZCYSJbTrXLpsPeKwmmNAm5dW
+
+Create production build to check for any errors
+```bash
+npm run build
+```
+
+https://vercel.com/
+![vercel1.png](screenshots%2Fvercel1.png)
+
+![vercel2.png](screenshots%2Fvercel2.png)
+
+![vercel3.png](screenshots%2Fvercel3.png)
+
+![vercel4.png](screenshots%2Fvercel4.png)
+
+
+

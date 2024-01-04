@@ -2,6 +2,8 @@ import {prisma} from '@/lib/prisma';
 import {Metadata} from 'next';
 import FollowButton from "@/components/FollowButton";
 
+export const dynamic = 'force-dynamic'
+
 interface Props {
     params: {
         id: string;

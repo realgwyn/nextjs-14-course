@@ -9,13 +9,13 @@ export async function POST(req: Request) {
 
     const currentUserId = await prisma.user
         .findUnique({where: {email: currentUserEmail}})
-        .then((user) => user?.id!);
+        .then((user : any) => user?.id!);
 
     const record = await prisma.follows.create({
         data: {
             followerId: currentUserId,
             followingId: targetUserId
-        }
+        } as any
     });
 
     return NextResponse.json(record);
@@ -28,14 +28,14 @@ export async function DELETE(req: NextRequest) {
 
     const currentUserId = await prisma.user
         .findUnique({where: {email: currentUserEmail}})
-        .then((user) => user?.id!);
+        .then((user : any) => user?.id!);
 
     const record = await prisma.follows.delete({
         where: {
             followerId_followingId: {
                 followerId: currentUserId,
                 followingId: targetUserId!,
-            }
+            } as any
         }
     });
 

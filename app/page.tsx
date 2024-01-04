@@ -8,7 +8,7 @@ export default async function Home() {
     let message = "Hello Stranger";
     console.log("session: " + session)
     if(session){
-        message = `Hello ${session?.user.name}`
+        message = `Hello ${session?.user?.name}`
     }
 
     return (

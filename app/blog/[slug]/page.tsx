@@ -14,7 +14,7 @@ export default async function BlogPostPage({params}: Props) {
     const posts: Post[] = await fetch('http://localhost:3000/api/content')
         .then((response) => response.json())
 
-    const post = posts.find((post) => post.slug === params.slug)!;
+    const post = posts.find((post : Post) => post.slug === params.slug)!;
 
     return (
         <div>

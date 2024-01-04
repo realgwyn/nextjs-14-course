@@ -1,10 +1,11 @@
 'use client'
 
+export const dynamic = 'force-dynamic'
 export default function BuggyPage() {
-    if (Math.random() < 0.5) {
-        console.log("time to fail!")
-        throw new Error("server unavailable")
-    }
+    // if (Math.random() < 0.5) {
+    //     console.log("time to fail!")
+    //     throw new Error("server unavailable")
+    // }
 
     return (
         <div>

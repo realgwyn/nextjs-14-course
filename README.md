@@ -405,3 +405,13 @@ export default async function UserProfile({params}: Props) {
 ```
 
 **DEMO:** http://localhost:3000/users and click on username to go to user's profile page
+
+### 16. Showing loading state
+
+Create [users/loading.tsx](app%2Fusers%2Floading.tsx)
+
+```tsx
+export default function LoadingUsers() {
+    return <div>Loading users list...</div>
+}
+```

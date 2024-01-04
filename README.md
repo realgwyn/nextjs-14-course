@@ -209,7 +209,6 @@ SHADOW_DATABASE_URL=postgresql://USERNAME:PASSWORD@ep-still-waterfall-*******.eu
 npx prisma init
 ```
 
-
 Open [prisma/schema.prisma](myspace%2Fprisma%2Fschema.prisma) and add:
 ```js
 shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
@@ -217,3 +216,110 @@ shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
 
 _Tip: Intellij install Prisma ORM plugin_
 
+### 11.. Setup Auth.js with Prisma
+
+https://authjs.dev/reference/adapter/prisma
+
+Run command:
+```bash
+npm install @prisma/client @auth/prisma-adapter
+```
+
+Add prisma adapter to [auth.ts](app%2Fauth.ts):
+```ts
+import NextAuth from "next-auth"
+import GithubProvider from 'next-auth/providers/github';
+import {PrismaAdapter} from "@auth/prisma-adapter";
+import {PrismaClient} from "@prisma/client";
+
+export const prisma = new PrismaClient();
+
+export const authOptions  = {
+    providers: [
+        GithubProvider({
+            clientId: process.env.GITHUB_ID!,
+            clientSecret: process.env.GITHUB_SECRET!,
+        }),
+    ],
+    adapter: PrismaAdapter(prisma),
+};
+
+export const { handlers: { GET, POST }, auth,} = NextAuth(authOptions);
+```
+
+Paste Auth.js schema to `schema.prisma`
+```prisma
+// Auth.js Schema
+
+model Account {
+  id                 String  @id @default(cuid())
+  userId             String
+  type               String
+  provider           String
+  providerAccountId  String
+  refresh_token      String?  @db.Text
+  access_token       String?  @db.Text
+  expires_at         Int?
+  token_type         String?
+  scope              String?
+  id_token           String?  @db.Text
+  session_state      String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String?   @unique
+  emailVerified DateTime?
+  image         String?
+  accounts      Account[]
+  sessions      Session[]
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+```
+
+Configure database to use new schema:
+```bash
+npx prisma migrate dev
+```
+
+```bash
+$> npx prisma migrate dev
+
+Environment variables loaded from .env
+Prisma schema loaded from prisma/schema.prisma
+Datasource "db": PostgreSQL database "sandbox", schema "public" at "ep-still-waterfall-85718213.eu-central-1.aws.neon.tech"
+
+✔ Enter a name for the new migration: … init-authjs
+Applying migration `20240103090427_init_authjs`
+
+The following migration(s) have been created and applied from new schema changes:
+
+migrations/
+  └─ 20240103090427_init_authjs/
+    └─ migration.sql
+
+Your database is now in sync with your schema.
+```
+
+**DEMO TIME - login and check if session is persisted in the database** 

@@ -169,3 +169,18 @@ Create [AuthProvider.tsx](app%2FAuthProvider.tsx), wrap [layout.tsx](app%2Flayou
 Create button components [components/buttons.tsx](components%2Fbuttons.tsx) add them to [NavMenu.tsx](app%2FNavMenu.tsx)
 
 Fix  [next.config.js](next.config.js) to properly load github avatars
+
+### 8. Redirecting to login page
+
+[dashboard/page.tsx](app%2Fdashboard%2Fpage.tsx):
+```ts
+import {auth} from "@/app/auth";
+import {redirect} from "next/navigation";
+
+const session = await auth();
+if(!session) {
+redirect('/api/auth/signin')
+}
+```
+
+**DEMO:** http://localhost:3000/dashboard

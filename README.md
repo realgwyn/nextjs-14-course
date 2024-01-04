@@ -466,3 +466,30 @@ Create [dashboard/ProfileForm.tsx](app%2Fdashboard%2FProfileForm.tsx) and add it
 Create API Route [api/user/route.ts](app%2Fapi%2Fuser%2Froute.ts)
 
 **DEMO:** http://localhost:3000/dashboard modify data and click 'Save' button
+
+### 19. Prisma: Relation table
+
+Add new table `Follows` and relation in `User` table in [schema.prisma](myspace%2Fprisma%2Fschema.prisma):
+```prisma
+
+model User {
+  //...
+  followedBy    Follows[] @relation("following")
+  following     Follows[] @relation("follower")
+  //...
+}
+
+model Follows {
+  follower    User   @relation("follower", fields: [followerId], references: [id])
+  followerId  String
+  following   User   @relation("following", fields: [followingId], references: [id])
+  followingId String
+
+  @@id([followerId, followingId])
+}
+```
+
+Run schema migration
+```bash
+npx prisma migrate dev
+```

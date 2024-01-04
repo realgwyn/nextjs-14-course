@@ -161,3 +161,11 @@ Start the app
 
 Go to http://localhost:3000/api/auth/signin to test login with github provider
 Sign out with http://localhost:3000/api/auth/signout
+
+### 7. Login buttons, accessing session on client and server side
+
+Create [AuthProvider.tsx](app%2FAuthProvider.tsx), wrap [layout.tsx](app%2Flayout.tsx) with it
+
+Create button components [components/buttons.tsx](components%2Fbuttons.tsx) add them to [NavMenu.tsx](app%2FNavMenu.tsx)
+
+Fix  [next.config.js](next.config.js) to properly load github avatars

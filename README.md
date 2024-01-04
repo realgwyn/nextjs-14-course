@@ -216,7 +216,7 @@ shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
 
 _Tip: Intellij install Prisma ORM plugin_
 
-### 11.. Setup Auth.js with Prisma
+### 11. Setup Auth.js with Prisma
 
 https://authjs.dev/reference/adapter/prisma
 
@@ -333,3 +333,23 @@ Click login button, login with github account
 Next go to https://console.neon.tech/ dashboard and check if session exists
 
 ![screenshots/prisma1.png](screenshots/prisma1.png)
+
+### 12. Prisma: schema migration
+
+Add two new fields `bio` and `age` in [prisma/schema.prisma](myspace%2Fprisma%2Fschema.prisma)
+```prisma
+
+model User {
+...
+  bio           String?   @db.Text
+  age           Int?
+...
+```
+
+Run migration command:
+```bash
+npx prisma migrate dev
+```
+
+**DEMO:** Check if new columns are present in user table:
+![screenshots/prisma2.png](screenshots/prisma2.png)

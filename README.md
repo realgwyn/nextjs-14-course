@@ -60,3 +60,15 @@ export const metadata: Metadata = {
     description: 'We are social media company',
 };
 ```
+
+### 4. API Route
+
+[api/content/route.ts](app%2Fapi%2Fcontent%2Froute.ts)
+
+http://localhost:3000/api/content
+
+```ts
+export async function GET() {
+    return NextResponse.json(posts);
+}
+```

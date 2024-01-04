@@ -387,3 +387,21 @@ export async function GET(request: Request){
 Create [components/UserCard.tsx](components%2FUserCard.tsx) and add it to [users/page.tsx](app%2Fusers%2Fpage.tsx)
 
 **DEMO:** http://localhost:3000/users
+
+### 15. Prisma: Accessing database in dynamic Routes
+
+[users/[id]/page.tsx](app%2Fusers%2F%5Bid%5D%2Fpage.tsx)
+
+Simple query with prisma:
+```ts
+export default async function UserProfile({params}: Props) {
+    const user = await prisma.user.findUnique({
+        where: {
+            id: params.id
+        }
+    });
+    //...
+}
+```
+
+**DEMO:** http://localhost:3000/users and click on username to go to user's profile page

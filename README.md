@@ -504,6 +504,17 @@ Follow button used in user profile page: [users/[id]/page.tsx](app%2Fusers%2F%5B
 
 ### 21. Deploy on Vercel
 
+**Install [Vercel CLI](https://vercel.com/docs/cli) for dry-running builds locally**  
+
+```bash
+pnpm i -g vercel
+```
+
+Dry-run vercel build locally
+```bash
+vercel build
+```
+
 TODO: build keeps failing, linting errors...
 https://vercel.com/rafals-projects-d385de8b/nextjs-14-course/DY6cZCYSJbTrXLpsPeKwmmNAm5dW
 

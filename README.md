@@ -504,33 +504,61 @@ Follow button used in user profile page: [users/[id]/page.tsx](app%2Fusers%2F%5B
 
 ### 21. Deploy on Vercel
 
+Create production build to check for any errors
+```bash
+npm run build
+```
+
 **Install [Vercel CLI](https://vercel.com/docs/cli) for dry-running builds locally**  
 
 ```bash
 pnpm i -g vercel
 ```
 
-Dry-run vercel build locally
+
+Add missing dependencies to [package.json](package.json)
 ```bash
-vercel build
+npm install prisma #duh
 ```
 
-TODO: build keeps failing, linting errors...
-https://vercel.com/rafals-projects-d385de8b/nextjs-14-course/DY6cZCYSJbTrXLpsPeKwmmNAm5dW
-
-Create production build to check for any errors
-```bash
-npm run build
+Add `vercel-build` and `postinstall` scripts to [package.json](package.json) which will be used by Vercel deployment
+```json
+{
+    "scripts": {
+      ...
+      "vercel-build": "prisma generate && prisma migrate deploy && next build",
+      "prisma:generate": "prisma generate",
+      "postinstall": "prisma generate",
+    }
+}
 ```
 
-https://vercel.com/
+Go to https://vercel.com/ and import project from your github repo
 ![vercel1.png](screenshots%2Fvercel1.png)
 
 ![vercel2.png](screenshots%2Fvercel2.png)
 
+Allow Vercel integration with your project, choose option `only select repositories` and choose your nextjs project
+
 ![vercel3.png](screenshots%2Fvercel3.png)
 
+Next, go to your imported project  `.../settings/environment-variables`
+![vercel4.1.png](screenshots%2Fvercel4.1.png)
+
+And add entries from your local `.env` file
 ![vercel4.png](screenshots%2Fvercel4.png)
 
+**Finaly add a separate database for preview deployments**  
+Go to https://console.neon.tech/app/projects and create 3rd database `sandbox-vercel`, copy its connection string
+and add it to your Vercel project Settings Environment Variable for `preview` environment
 
+![vercel5.png](screenshots%2Fvercel5.png)
+
+_Vercel uses the DATABASE_URL environment variable you define when you import the project for both the production and preview environments. This causes problems if you create a pull request with a database schema migration because the pull request will change the schema of the production database._
+
+
+Dry-run vercel build locally
+```bash
+vercel build
+```
 
